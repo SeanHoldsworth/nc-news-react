@@ -34,3 +34,11 @@ body {
   margin: 5px;
   background-color: lightblue;
 }
+
+.article-votes {
+  display: flex;
+  gap: 1rem;
+  height: 1rem;
+  align-items: center;
+  justify-content: center;
+}
