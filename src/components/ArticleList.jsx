@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getArticles } from '../utils';
 
-import Header from './PageHeader';
+import PageHeader from './PageHeader';
 import ArticleHeader from './ArticleHeader';
 
 export default function ArticleList() {
@@ -40,7 +40,7 @@ export default function ArticleList() {
 
   return (
     <div>
-      <Header />
+      <PageHeader />
       <ul className = "article-list">
         {articleList}
       </ul>

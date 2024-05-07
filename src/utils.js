@@ -9,3 +9,15 @@ export function getArticles() {
     .get(`/articles`)
     .then(({ data: { articles: articles } }) => articles);
 }
+
+export function getArticle(article_id) {
+  return api
+    .get(`/articles/${article_id}`)
+    .then(({ data: { article: article } }) => article);
+}
+
+export function getComments(article_id) {
+  return api
+    .get(`/articles/${article_id}/comments`)
+    .then(({ data: { comments: comments } }) => comments);
+}
