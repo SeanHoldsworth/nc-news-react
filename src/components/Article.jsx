@@ -5,6 +5,7 @@ import { getArticle, getComments } from '../utils';
 import PageHeader from './PageHeader';
 import ArticleHeader from './ArticleHeader';
 import ArticleBody from './ArticleBody';
+import ArticleVotes from './ArticleVotes';
 import CommentList from './CommentList';
 
 export default function Article() {
@@ -27,7 +28,7 @@ export default function Article() {
         setIsLoading(false);
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         setIsError(true);
       });
   }, []);
@@ -48,6 +49,7 @@ export default function Article() {
       <PageHeader />
       <ArticleHeader key = {article_id} article = {article} />
       <ArticleBody article = {article} />
+      <ArticleVotes article = {article} setArticle = {setArticle} />
       <CommentList comments = {comments} />
     </>
   );
