@@ -3,13 +3,16 @@ import { Route, Routes } from 'react-router-dom';
 
 import ArticleList from './components/ArticleList';
 import Article from './components/Article';
-
-// import './App.css'
+import FrontPage from './components/FrontPage';
 
 export default function App() {
   return (
     <>
       <Routes>
+        <Route
+          path = '/'
+          element = { <ArticleList /> }
+        />
         <Route
           path = '/articles'
           element = { <ArticleList /> }
