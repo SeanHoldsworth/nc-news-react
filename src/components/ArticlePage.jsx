@@ -29,7 +29,6 @@ export default function Article() {
         setIsLoading(false);
       })
       .catch(error => {
-        //console.log(error);
         setIsError(true);
       });
   }, []);
@@ -42,9 +41,6 @@ export default function Article() {
     return <h2>Loading...</h2>
   }
 
-  //console.log(article);
-  //console.log(comments);
-
   return (
     <>
       <PageHeader />
@@ -52,7 +48,7 @@ export default function Article() {
       <ArticleBody article = {article} />
       <NewCommentButton article = {article} />
       <ArticleVotes article = {article} setArticle = {setArticle} />
-      <CommentList comments = {comments} />
+      <CommentList comments = {comments} setComments = {setComments} />
     </>
   );
 }
