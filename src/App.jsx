@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
 
-import ArticleList from './components/ArticleList';
-import Article from './components/Article';
+import ArticleListPage from './components/ArticleListPage';
+import ArticlePage from './components/ArticlePage';
 import FrontPage from './components/FrontPage';
+import NewCommentPage from './components/NewCommentPage';
 
 export default function App() {
   return (
@@ -11,15 +12,19 @@ export default function App() {
       <Routes>
         <Route
           path = '/'
-          element = { <ArticleList /> }
+          element = { <ArticleListPage /> }
         />
         <Route
           path = '/articles'
-          element = { <ArticleList /> }
+          element = { <ArticleListPage /> }
         />
         <Route
           path = '/article/:article_id'
-          element = { <Article /> }
+          element = { <ArticlePage /> }
+        />
+        <Route
+          path = '/comment/:article_id'
+          element = { <NewCommentPage /> }
         />
       </Routes>
     </>

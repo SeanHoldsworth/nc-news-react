@@ -9,10 +9,8 @@ export default function CommentList({comments}) {
     <Comment key = {comment.comment_id} comment = {comment} />);
 
   return (
-    <div>
-      <ul className = "comment-list">
-        {commentList}
-      </ul>
-    </div>
+    <ul className = "comment-list">
+      {commentList}
+    </ul>
   );
 }
