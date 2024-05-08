@@ -28,7 +28,7 @@ export function patchArticleVotes(article_id, incVotes) {
     .then(({ data: { article: article } }) => article);
 }
 
-export function postComment(article_id, comment, username='happyamy2016') {
+export function postComment(article_id, comment, username) {
   const commentData = {
     username: username,
     body: comment
@@ -37,4 +37,9 @@ export function postComment(article_id, comment, username='happyamy2016') {
   return api
     .post(`/articles/${article_id}/comments`, commentData)
     .then(({data: { comment: comment } }) => comment);
+}
+
+export function deleteComment(comment_id) {
+  return api
+    .delete(`/comments/${comment_id}`);
 }

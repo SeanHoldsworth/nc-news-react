@@ -1,19 +1,21 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
 
 import { postComment } from '../utils';
+import { UserContext } from '../contexts/User';
 
 export default function CommentTextArea({article}) {
   const [commentContent, setCommentContent] = useState('');
   const [posted, setPosted] = useState(false);
   const navigate = useNavigate();
 
+  const { username } = useContext(UserContext);
+
   function addComment(e) {
-    console.log(commentContent);
     e.preventDefault();
     setPosted(true);
-    postComment(article.article_id, commentContent)
+    postComment(article.article_id, commentContent, username)
       .then(comment => {
         navigate(`/article/${article.article_id}`);
       });
