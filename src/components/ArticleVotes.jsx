@@ -21,9 +21,17 @@ export default function ArticleVotes({article, setArticle}) {
 
   return (
     <div className = "article-votes">
-      <button disabled = {voteChange === -1} onClick={downVote}> - </button>
+      <button
+        disabled = {voteChange === -1}
+        onClick={downVote}>
+        <i className="arrow down"></i>
+      </button>
       <p>{article.votes}</p>
-      <button disabled = {voteChange === 1} onClick={upVote}> + </button>
+      <button
+        disabled = {voteChange === 1}
+        onClick={upVote}>
+        <i className="arrow up"></i>
+      </button>
     </div>
   );
 }

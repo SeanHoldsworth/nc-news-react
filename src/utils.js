@@ -27,3 +27,14 @@ export function patchArticleVotes(article_id, incVotes) {
     .patch(`/articles/${article_id}`, {incVotes})
     .then(({ data: { article: article } }) => article);
 }
+
+export function postComment(article_id, comment, username='happyamy2016') {
+  const commentData = {
+    username: username,
+    body: comment
+  };
+
+  return api
+    .post(`/articles/${article_id}/comments`, commentData)
+    .then(({data: { comment: comment } }) => comment);
+}
