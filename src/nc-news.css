@@ -88,6 +88,21 @@ h1, h2 {
   padding:0;
 }
 
+.article-sort-bar {
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+}
+
+.article-sort-options {
+  display: flex;
+  align-items: center;
+}
+
+.article-sort-options p {
+  margin-right: 10px;
+}
+
 .comment-list {
   display: flex;
   flex-direction: column;

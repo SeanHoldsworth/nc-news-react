@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useSearchParams } from 'react-router-dom';
 
 import ArticleListPage from './components/ArticleListPage';
 import ArticlePage from './components/ArticlePage';
@@ -8,6 +7,10 @@ import NewCommentPage from './components/NewCommentPage';
 import TopicListPage from './components/TopicListPage';
 
 export default function App() {
+  const [searchParams, setSearchParams] = useSearchParams({
+    sort_by: 'created_at'
+  });
+
   return (
     <>
       <Routes>
@@ -17,7 +20,12 @@ export default function App() {
         />
         <Route
           path = '/articles'
-          element = { <ArticleListPage /> }
+          element = {
+             <ArticleListPage
+              searchParams = {searchParams}
+              setSearchParams = {setSearchParams}
+            />
+          }
         />
         <Route
           path = '/article/:article_id'

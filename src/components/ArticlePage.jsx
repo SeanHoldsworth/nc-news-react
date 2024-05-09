@@ -9,7 +9,7 @@ import NewCommentButton from './NewCommentButton';
 import ArticleVotes from './ArticleVotes';
 import CommentList from './CommentList';
 
-export default function Article() {
+export default function ArticlePage() {
   const { article_id } = useParams();
 
   const [article, setArticle] = useState(null);

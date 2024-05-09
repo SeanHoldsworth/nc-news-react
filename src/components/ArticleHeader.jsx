@@ -10,6 +10,7 @@ export default function ArticleHeader({article}) {
         <p><span> Topic: </span> {article.topic} </p>
         <p><span> Author: </span> {article.author} </p>
         <p><span> Date: </span> {postTime} </p>
+        <p><span> Votes: </span> {article.votes} </p>
       </Link>
     </li>
   );
