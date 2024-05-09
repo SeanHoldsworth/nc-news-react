@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getArticles } from '../utils';
 
 import PageHeader from './PageHeader';
@@ -9,10 +10,12 @@ export default function ArticleList() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
     setIsLoading(true);
 
-    getArticles()
+    getArticles(searchParams)
       .then(articles => {
         setArticles(articles);
         setIsLoading(false);

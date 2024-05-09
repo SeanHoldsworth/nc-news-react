@@ -5,6 +5,7 @@ import ArticleListPage from './components/ArticleListPage';
 import ArticlePage from './components/ArticlePage';
 import FrontPage from './components/FrontPage';
 import NewCommentPage from './components/NewCommentPage';
+import TopicListPage from './components/TopicListPage';
 
 export default function App() {
   return (
@@ -12,7 +13,7 @@ export default function App() {
       <Routes>
         <Route
           path = '/'
-          element = { <ArticleListPage /> }
+          element = { <FrontPage /> }
         />
         <Route
           path = '/articles'
@@ -25,6 +26,10 @@ export default function App() {
         <Route
           path = '/comment/:article_id'
           element = { <NewCommentPage /> }
+        />
+        <Route
+          path = '/topics'
+          element = { <TopicListPage /> }
         />
       </Routes>
     </>

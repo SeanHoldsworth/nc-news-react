@@ -4,9 +4,17 @@ const api = axios.create({
   baseURL: 'https://broken-news.onrender.com/api'
 });
 
-export function getArticles() {
+export function getArticles(searchParams) {
+  let path = '/articles';
+
+  const topic = searchParams.get('topic');
+
+  if (topic)
+    path += `?topic=${topic}`;
+  
+  console.log(path);
   return api
-    .get(`/articles`)
+    .get(path)
     .then(({ data: { articles: articles } }) => articles);
 }
 
@@ -42,4 +50,10 @@ export function postComment(article_id, comment, username) {
 export function deleteComment(comment_id) {
   return api
     .delete(`/comments/${comment_id}`);
+}
+
+export function getTopics() {
+  return api
+    .get('/topics')
+    .then(({ data: { topics } }) => topics);
 }
