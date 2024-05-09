@@ -3,9 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 import { getArticles } from '../utils';
 
 import PageHeader from './PageHeader';
-import ArticleHeader from './ArticleHeader';
+import ArticleList from './ArticleList';
+import SortOptionsBar from './SortOptionsBar';
 
-export default function ArticleList() {
+//export default function ArticleListPage({searchParams, setSearchParams}) {
+export default function ArticleListPage() {
   const [articles, setArticles] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +25,7 @@ export default function ArticleList() {
       .catch(error => {
         setIsError(true);
       });
-  }, []);
+  }, [searchParams]);
 
   if (isError) {
     return <h2>Failed to load data.</h2>
@@ -37,15 +39,16 @@ export default function ArticleList() {
     return <p>There are no matching articles.</p>;
   }
 
-  const articleList = articles.map(article =>
-    <ArticleHeader key = {article.article_id} article = {article} />);
-
   return (
     <div>
       <PageHeader />
-      <ul className = "article-list">
-        {articleList}
-      </ul>
+      <SortOptionsBar
+        searchParams = {searchParams}
+        setSearchParams  = {setSearchParams}
+      />
+      <ArticleList
+        articles = {articles}
+      />
     </div>
   );
 }

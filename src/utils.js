@@ -1,18 +1,51 @@
 import axios from 'axios';
 
+// Utility function to create an updated searchParams object which
+// can be passed to setSearchParams.
+
+export const updateSearchParams = (searchParams, key, value) =>
+  Object.assign({},
+    [...searchParams.entries()].reduce(
+        (o, [key, value]) => ({ ...o, [key]: value }),
+        {}
+    ),
+    { [key]: value });
+
 const api = axios.create({
   baseURL: 'https://broken-news.onrender.com/api'
 });
 
 export function getArticles(searchParams) {
   let path = '/articles';
+  let queryStarted = false;
 
   const topic = searchParams.get('topic');
 
-  if (topic)
+  if (topic) {
     path += `?topic=${topic}`;
+    queryStarted = true;
+  }
+
+  const sort_by = searchParams.get('sort_by');
+
+  if (sort_by && sort_by !== 'created_at') {
+    path += queryStarted ? '&' : '?';
+    path += `sort_by=${sort_by}`;
+    queryStarted = true;
+  }
+
+  const order = searchParams.get('order');
+
+  // order will be passed and have a value of 'asc' or 'desc'.
+
+  if (queryStarted || order === 'asc') {
+    if (order) {
+      path += queryStarted ? '&' : '?';
+      path += `order=${order}`;
+    }
+  }
   
-  console.log(path);
+  //console.log('query path:', path);
   return api
     .get(path)
     .then(({ data: { articles: articles } }) => articles);
