@@ -6,10 +6,10 @@ export default function ArticleHeader({article}) {
   return (
     <li className = "article-header">
       <Link to={`/article/${article.article_id}`}>
-        <p><strong> Subject: </strong> {article.title} </p>
-        <p><strong> Topic: </strong> {article.topic} </p>
-        <p><strong> Author: </strong> {article.author} </p>
-        <p><strong> Date: </strong> {postTime} </p>
+        <p><span> Subject: </span> {article.title} </p>
+        <p><span> Topic: </span> {article.topic} </p>
+        <p><span> Author: </span> {article.author} </p>
+        <p><span> Date: </span> {postTime} </p>
       </Link>
     </li>
   );

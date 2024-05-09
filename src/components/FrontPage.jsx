@@ -5,9 +5,12 @@ export default function FrontPage() {
   return (
     <>
       <PageHeader/>
-      <h1> This will eventually be the landing page </h1>
+      <h2> This will eventually be the landing page </h2>
       <Link to = '/articles'>
-        <p> Click here to go to the article list.</p>
+        <p> Click here to go to the list of all articles.</p>
+      </Link>
+      <Link to = '/topics'>
+        <p> Click here to go to view all topics.</p>
       </Link>
     </>
   );
