@@ -27,7 +27,7 @@ export default function SortBy({searchParams, setSearchParams}) {
           checked = {searchParams.get('sort_by') === 'votes'}
           onChange = {onOptionChange}
         />
-        <label htmlFor = "votes"> Votes </label>
+        <label htmlFor = "votes"> Likes </label>
       </form> 
     </div>
   );

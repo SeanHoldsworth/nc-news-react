@@ -1,10 +1,10 @@
 import TopBar from './TopBar';
 
-export default function Header() {
+export default function PageHeader() {
   return (
     <>
     <TopBar />
-    <h1> NC News </h1>
+    <h1> Broken News </h1>
     </>
   );
 }

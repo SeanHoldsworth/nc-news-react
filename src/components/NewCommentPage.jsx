@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import PageHeader from './PageHeader';
-import ArticleHeader from './ArticleHeader';
+import ArticleHeader from './ArticleHeaderText';
 import ArticleBody from './ArticleBody';
 import CommentTextArea from './CommentTextArea';
+import Status from './Status';
+import Error from './Error';
 
 import { getArticle } from '../utils';
 
@@ -29,11 +31,11 @@ export default function NewComment() {
   }, []);
 
   if (isError) {
-    return <h2>Failed to load data.</h2>
+    return <Error> Failed to load data. </Error>
   }
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <Status> Loading... </Status>
   }
 
   return (

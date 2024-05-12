@@ -3,23 +3,40 @@ import { useParams } from 'react-router-dom';
 import { getArticle, getComments } from '../utils';
 
 import PageHeader from './PageHeader';
-import ArticleHeader from './ArticleHeader';
+import ArticleHeader from './ArticleHeaderText';
 import ArticleBody from './ArticleBody';
 import NewCommentButton from './NewCommentButton';
 import ArticleVotes from './ArticleVotes';
 import CommentList from './CommentList';
+import ArticleImage from './ArticleImage';
+import Status from './Status';
+import Error from './Error';
 
 export default function ArticlePage() {
   const { article_id } = useParams();
 
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState(false);
-  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState(null);
 
-  const requests = [getArticle(article_id), getComments(article_id)];
+  // Requests for both the article and the comments can be made at the same
+  // time using Promise.all but each request must have its own error handler
+  // or else React will see an unresolved promise.
+
+  const makeRequest = (request, article_id) =>
+     request(article_id)
+      .catch(({ response: { data: { msg  }}}) => {
+        setErrorMsg(msg);
+        return Promise.reject(msg);
+      });
 
   useEffect(() => {
+    const requests = [
+      makeRequest(getArticle, article_id),
+      makeRequest(getComments, article_id)
+    ];
+
     setIsLoading(true);
 
     Promise.all(requests)
@@ -29,26 +46,27 @@ export default function ArticlePage() {
         setIsLoading(false);
       })
       .catch(error => {
-        setIsError(true);
-      });
+        setErrorMsg('Failed to load data.');
+    });
   }, []);
 
-  if (isError) {
-    return <h2>Failed to load data.</h2>
+  if (errorMsg) {
+    return <Error> {errorMsg} </Error>;
   }
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <Status> Loading... </Status>;
   }
 
   return (
-    <>
+    <div className = "article">
       <PageHeader />
-      <ArticleHeader key = {article_id} article = {article} />
+      <ArticleHeader article = {article} />
+      <ArticleImage article = {article} />
       <ArticleBody article = {article} />
       <NewCommentButton article = {article} />
       <ArticleVotes article = {article} setArticle = {setArticle} />
       <CommentList comments = {comments} setComments = {setComments} />
-    </>
+    </div>
   );
 }

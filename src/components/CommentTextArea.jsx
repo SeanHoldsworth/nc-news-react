@@ -8,6 +8,7 @@ import { UserContext } from '../contexts/User';
 export default function CommentTextArea({article}) {
   const [commentContent, setCommentContent] = useState('');
   const [posted, setPosted] = useState(false);
+  const [empty, setEmpty] = useState(true);
   const navigate = useNavigate();
 
   const { username } = useContext(UserContext);
@@ -21,6 +22,15 @@ export default function CommentTextArea({article}) {
       });
   }
 
+  // Monitor the "Post" button so that it is disabled if there is no
+  // comment content. It will also be disabled once pressed.
+
+  function contentChangeHandler(e) {
+    const content = e.target.value;
+    setEmpty(content.trim().length === 0); 
+    setCommentContent(content);
+  }
+
   return (
     <div className = "text-area">
       <form method = "post" onSubmit = {addComment}>
@@ -28,11 +38,15 @@ export default function CommentTextArea({article}) {
         <textarea
           name = "commentContent"
           autoFocus
-          onChange = {e => setCommentContent(e.target.value)}>
+          onChange = {contentChangeHandler}>
         </textarea>
         </div>
         <div className = "text-area-buttons">
-          <button type = "submit" disabled = {posted}>Post</button>
+          <button
+            type = "submit"
+            disabled = {posted || empty}>
+              Post
+          </button>
           <Link to = {`/articles`}>
             <button type = "button"> Cancel </button>
           </Link>

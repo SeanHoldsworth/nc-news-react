@@ -1,31 +1,49 @@
-import { Route, Routes, useSearchParams } from 'react-router-dom';
+
+import { useState, useEffect, useContext } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { getTopics } from './utils';
 
 import ArticleListPage from './components/ArticleListPage';
 import ArticlePage from './components/ArticlePage';
-import FrontPage from './components/FrontPage';
 import NewCommentPage from './components/NewCommentPage';
-import TopicListPage from './components/TopicListPage';
+
+import { TopicsContext } from './contexts/Topics';
 
 export default function App() {
-  const [searchParams, setSearchParams] = useSearchParams({
-    sort_by: 'created_at'
-  });
+  const { setTopics } = useContext(TopicsContext);
+
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    getTopics()
+      .then(topicsList => {
+        setTopics(topicsList);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        setIsError(true);
+      });
+  }, []);
+
+  if (isError)
+    return <h2> Failed to load topic data. </h2>;
+
+  if (isLoading)
+    return <h2> Loading... </h2>;
 
   return (
     <>
       <Routes>
         <Route
           path = '/'
-          element = { <FrontPage /> }
+          element = { <ArticleListPage /> }
         />
         <Route
           path = '/articles'
-          element = {
-             <ArticleListPage
-              searchParams = {searchParams}
-              setSearchParams = {setSearchParams}
-            />
-          }
+          element = { <ArticleListPage /> }
         />
         <Route
           path = '/article/:article_id'
@@ -36,8 +54,8 @@ export default function App() {
           element = { <NewCommentPage /> }
         />
         <Route
-          path = '/topics'
-          element = { <TopicListPage /> }
+          path = '*'
+          element = { <ArticleListPage /> }
         />
       </Routes>
     </>

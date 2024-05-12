@@ -5,7 +5,8 @@ export default function ArticleList({articles}) {
     <ArticleHeader
       key = {article.article_id}
       article = {article}
-    />);
+    />
+  );
 
   return (
     <ul className = "article-list">
