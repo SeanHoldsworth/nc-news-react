@@ -15,6 +15,9 @@ const api = axios.create({
   baseURL: 'https://broken-news.onrender.com/api'
 });
 
+// The extra logic in the getArticles function below is concerned with
+// simplifying the query path where possible.
+
 export function getArticles(searchParams) {
   let path = '/articles';
   let queryStarted = false;
@@ -36,7 +39,7 @@ export function getArticles(searchParams) {
 
   const order = searchParams.get('order');
 
-  // order will be passed and have a value of 'asc' or 'desc'.
+  // The sort order will be passed and have a value of 'asc' or 'desc'.
 
   if (queryStarted || order === 'asc') {
     if (order) {
@@ -45,7 +48,6 @@ export function getArticles(searchParams) {
     }
   }
   
-  //console.log('query path:', path);
   return api
     .get(path)
     .then(({ data: { articles: articles } }) => articles);

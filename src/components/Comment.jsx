@@ -37,8 +37,7 @@ export default function Comment({comment, comments, setComments}) {
         }
       </div>
       <div className = "comment-right">
-        <p>Author: {comment.author}</p>
-        <p>Date: {postTime}</p>
+        <p><span>{`Posted by ${comment.author} on ${postTime}`}</span></p>
         <p>{comment.body}</p>
       </div>
     </li>
