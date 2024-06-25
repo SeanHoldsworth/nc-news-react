@@ -92,3 +92,9 @@ export function getTopics() {
     .get('/topics')
     .then(({ data: { topics } }) => topics);
 }
+
+export function getUsers() {
+  return api
+    .get('/users')
+    .then(({ data: { users } }) => users);
+}

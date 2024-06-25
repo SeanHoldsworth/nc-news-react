@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticle, getComments } from '../utils';
 
@@ -12,6 +12,8 @@ import ArticleImage from './ArticleImage';
 import Status from './Status';
 import Error from './Error';
 
+import { UserContext } from '../contexts/User';
+
 export default function ArticlePage() {
   const { article_id } = useParams();
 
@@ -19,6 +21,8 @@ export default function ArticlePage() {
   const [comments, setComments] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
+
+  const { username } = useContext(UserContext);
 
   // Requests for both the article and the comments can be made at the same
   // time using Promise.all but each request must have its own error handler
@@ -64,8 +68,13 @@ export default function ArticlePage() {
       <ArticleHeader article = {article} />
       <ArticleImage article = {article} />
       <ArticleBody article = {article} />
-      <NewCommentButton article = {article} />
-      <ArticleVotes article = {article} setArticle = {setArticle} />
+      { username ?
+        <>
+          <NewCommentButton article = {article} />
+          <ArticleVotes article = {article} setArticle = {setArticle} />
+        </> :
+        <h2>Login to comment and vote.</h2>
+      }
       <CommentList comments = {comments} setComments = {setComments} />
     </div>
   );

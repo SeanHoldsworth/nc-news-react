@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 
 import { TopicContext } from '../contexts/Topic';
 import { TopicsContext } from '../contexts/Topics';
+import { UserContext } from '../contexts/User';
+
+import LoginMenu from './LoginMenu';
+import LogoutButton from './LogoutButton';
 
 export default function TopBar() {
   const { topic } = useContext(TopicContext);
   const { topics } = useContext(TopicsContext);
+  const { username } = useContext(UserContext);
 
   const topicList = topics.map(({ slug: slug }) =>
     <Link 
@@ -17,6 +22,8 @@ export default function TopBar() {
     </Link>
   );
 
+  const loggedUser = <span className = "top-bar-user"> {username} </span>;
+
   return (
     <nav className = "top-bar">
       <Link
@@ -25,6 +32,8 @@ export default function TopBar() {
           Home
       </Link>
       {topicList}
+      {username ? <LogoutButton /> : <LoginMenu />}
+      {loggedUser}
     </nav>
   );
 }
