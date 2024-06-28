@@ -1,8 +1,9 @@
-# React + Vite
+# Broken News Front End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React front end to my [back end implementation](https://github.com/SeanHoldsworth/nc-news)
+of the Northcoders News API. There is a live, hosted version of the interface which can be accessed at:
 
-Currently, two official plugins are available:
+https://broken-news.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Note that there will be a delay in this starting up because the back end database can take around
+30 seconds to become available.
